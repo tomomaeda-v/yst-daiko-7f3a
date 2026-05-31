@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>YST × 顧問大幸氏 共創PJ 管理ダッシュボード</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0f1419; --panel:#1a212b; --panel2:#212b38; --line:#2d3a4a;
+  --txt:#e6edf3; --mut:#8b9bb0; --accent:#3b9eff; --accent2:#1f6feb;
+  --ok:#2ea043; --warn:#d29922; --bad:#e5534b; --chip:#26313f;
+  --ax1:#3b9eff; --ax2:#56d4a0; --ax3:#c08bff; --ma:#ffb454;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:18px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:6px}
+h1{font-size:19px;font-weight:700}
+h1 small{display:block;font-size:12px;color:var(--mut);font-weight:400;margin-top:3px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;font-size:12px}
+.pill{background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:4px 11px;color:var(--mut)}
+.pill b{color:var(--txt)}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin:14px 0 18px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:10;border-bottom:1px solid var(--line)}
+nav button{background:transparent;border:1px solid transparent;color:var(--mut);padding:8px 13px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600}
+nav button:hover{background:var(--panel)}
+nav button.active{background:var(--accent2);color:#fff}
+.tab{display:none;animation:fade .25s}
+.tab.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.card h2{font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card h3{font-size:13px;color:var(--mut);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.kpi{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:26px;font-weight:700}
+.kpi .l{font-size:12px;color:var(--mut)}
+.kpi .t{font-size:11px;color:var(--mut);margin-top:4px}
+.bar{height:7px;background:var(--chip);border-radius:4px;overflow:hidden;margin-top:8px}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:4px;transition:width .4s}
+.axiscard{border-left:4px solid var(--ax1)}
+.ax1{border-color:var(--ax1)} .ax2{border-color:var(--ax2)} .ax3{border-color:var(--ax3)} .axM{border-color:var(--ma)}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;background:var(--chip);color:var(--mut);margin:2px 2px 0 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.03em;font-weight:600}
+tr:hover td{background:var(--panel2)}
+.status{font-size:11px;padding:3px 9px;border-radius:6px;font-weight:600;cursor:pointer;border:none;color:#fff}
+.s-todo{background:#3a4757} .s-prog{background:var(--warn)} .s-done{background:var(--ok)}
+input,textarea,select{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:6px;padding:6px 8px;font-family:inherit;font-size:13px;width:100%}
+input:focus,textarea:focus{outline:1px solid var(--accent)}
+.chk{width:18px;height:18px;cursor:pointer;accent-color:var(--ok)}
+.btn{background:var(--accent2);color:#fff;border:none;border-radius:7px;padding:8px 14px;cursor:pointer;font-size:13px;font-weight:600}
+.btn:hover{background:var(--accent)}
+.del{color:var(--bad);cursor:pointer;background:none;border:none;font-size:15px}
+.tl{position:relative;margin-left:8px;border-left:2px solid var(--line);padding-left:18px}
+.tl .ev{position:relative;margin-bottom:16px}
+.tl .ev::before{content:"";position:absolute;left:-25px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.tl .ev .mo{font-size:12px;color:var(--accent);font-weight:700}
+.muted{color:var(--mut)}
+.warnbox{background:rgba(210,153,34,.12);border:1px solid var(--warn);border-radius:8px;padding:10px 13px;font-size:13px;margin:8px 0}
+.note{font-size:12px;color:var(--mut);margin-top:6px}
+.pricetag{font-size:22px;font-weight:700;color:var(--ma)}
+.flag-hi{color:var(--bad);font-weight:600} .flag-mid{color:var(--warn)} .flag-lo{color:var(--ok)}
+.addrow{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.addrow input{flex:1;min-width:120px}
+ul.clean{list-style:none} ul.clean li{padding:4px 0 4px 18px;position:relative}
+ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
+footer{color:var(--mut);font-size:11px;text-align:center;padding:20px 0 8px;border-top:1px solid var(--line);margin-top:10px}
+.save-ind{font-size:11px;color:var(--ok);opacity:0;transition:opacity .3s}
+.save-ind.on{opacity:1}
+#gate{position:fixed;inset:0;background:#0f1419;display:flex;align-items:center;justify-content:center;z-index:9999}
+.gatebox{background:#1a212b;border:1px solid #2d3a4a;border-radius:14px;padding:28px 30px;width:320px;max-width:88vw;text-align:center}
+.gatebox .gtitle{font-size:15px;font-weight:700;color:#e6edf3;margin-bottom:6px}
+.gatebox .gsub{font-size:12px;color:#8b9bb0;margin-bottom:16px}
+.gatebox input{width:100%;margin-bottom:12px}
+.gatebox button{width:100%;background:#1f6feb;color:#fff;border:none;border-radius:7px;padding:10px;font-weight:700;cursor:pointer}
+.gerr{color:#e5534b;font-size:12px;margin-top:10px;min-height:14px}
+.wrap{visibility:hidden}
+body.unlocked .wrap{visibility:visible}
+</style>
+</head>
+<body>
+<div id="gate"><div class="gatebox"><div class="gtitle">YST × 大幸PJ 管理ダッシュボード</div><div class="gsub">閲覧パスワードを入力してください</div><input id="gpw" type="password" placeholder="パスワード"><button onclick="gtry()">開く</button><div id="gerr" class="gerr"></div></div></div>
+<script>
+var PASSWORD="taiko2026"; /* ← パスワードはここを書き換えて変更 */
+function gtry(){var v=document.getElementById('gpw').value;if(v===PASSWORD){sessionStorage.setItem('gok','1');document.getElementById('gate').style.display='none';document.body.classList.add('unlocked');}else{document.getElementById('gerr').textContent='パスワードが違います';}}
+document.getElementById('gpw').addEventListener('keydown',function(e){if(e.key==='Enter')gtry();});
+if(sessionStorage.getItem('gok')==='1'){document.getElementById('gate').style.display='none';document.body.classList.add('unlocked');}
+</script>
+<div class="wrap">
+<header>
+  <h1>YST × 顧問 大幸秀成氏 共創プロジェクト<small>半導体からソリューション事業への進化 ／ アクションプラン管理ダッシュボード</small></h1>
+  <div class="meta">
+    <span class="pill">契約期間 <b>2026/6/1〜12/31</b></span>
+    <span class="pill">定例 <b>毎月2時間</b></span>
+    <span class="pill">顧問料 <b>月10万円＋成功報酬(第4条)</b></span>
+    <span class="pill" id="today"></span>
+  </div>
+</header>
+
+<nav id="nav"></nav>
+
+<section class="tab" id="t-dash">
+  <div class="grid g4">
+    <div class="kpi"><div class="l">90日アクション進捗</div><div class="n" id="d-actpct">0%</div><div class="bar"><i id="d-actbar"></i></div><div class="t" id="d-actcnt"></div></div>
+    <div class="kpi"><div class="l">次回定例</div><div class="n" id="d-next" style="font-size:18px">—</div><div class="t">毎月2時間 ／ サイボウズ「大幸さん」</div></div>
+    <div class="kpi"><div class="l">買収パイプライン</div><div class="n">5<span style="font-size:14px">件</span></div><div class="t">候補 / 評価中</div></div>
+    <div class="kpi"><div class="l">大幸氏経由 商談</div><div class="n"><span id="d-logkk">0</span><span style="font-size:14px">件</span></div><div class="t" id="d-logsub">総ログ 0件 ／ 目標≥25</div></div>
+  </div>
+  <div class="card"><h2>このMTGの目的</h2>
+    <p>3つの戦略軸に合意し、<b>初期90日アクション</b>を定義する。顧問・大幸氏のネットワークと知見を活用し、YSTを「人材会社」から「人材×テクノロジーのソリューション事業会社」へ転換する。</p></div>
+  <div class="card"><h2>直近のNext Steps（議事録・提案資料より）</h2>
+    <ul class="clean">
+      <li>次回定例ミーティングの日程確定</li>
+      <li>優先テーマ（エッジAI／パワーデバイス／実装・評価）の事前レビュー資料を送付</li>
+      <li>NDA等の事務手続き完了</li>
+      <li>買収候補：トランスビジョン社の社内検討結果を回答（要・取締役会説明）／割安な代替候補の並行ソーシング</li>
+      <li>介護AI PoC候補 2施設の選定</li>
+    </ul></div>
+  <div class="card"><h2>7ヶ月成果指標（KPI）サマリー</h2><div class="grid g3" id="d-kpi"></div></div>
+</section>
+
+<section class="tab" id="t-strat">
+  <div class="card"><h2>進化ビジョン</h2>
+    <p><b>現状（外国人材会社）</b>：募集・教育・送り出し／登録支援（介護に強み）。ベトナム・ミャンマー・インドネシアにネットワーク。課題＝収益の人材依存・スケール限界・差別化困難。<br>
+    <b>進化ビジョン（ソリューション事業会社）</b>：「人材 × テクノロジー」による拡張で、収益源の多角化・粗利改善・ブランド転換を狙う。</p></div>
+  <div class="grid g2">
+    <div class="card axiscard ax1"><h2>戦略軸① 半導体・エレクトロニクス事業の深化・拡大</h2>
+      <p>2026年の世界半導体市場は9,750億ドル予測。既存の人的ネットワークでトップダウンに関係構築。</p>
+      <h3>顧客/市場</h3><div><span class="tag">OEM</span><span class="tag">Tier1</span><span class="tag">設計ハウス(ファブレス)</span><span class="tag">EMS</span><span class="tag">材料/装置</span></div>
+      <h3>協業/投資先</h3><div><span class="tag">実装/パッケージング</span><span class="tag">評価・テスト</span><span class="tag">組込みAI</span><span class="tag">パワー/車載</span><span class="tag">小ロットEMS</span></div>
+      <h3>先端フォーカス</h3><div><span class="tag">エッジAI×介護</span><span class="tag">ロボティクス</span><span class="tag">ヒューマノイド</span><span class="tag">データセンター</span></div></div>
+    <div class="card axiscard ax2"><h2>戦略軸② 介護等へのAI/テクノロジー導入</h2>
+      <p>差別化＝外国人材 × 現場知見 × AIソリューション。大幸氏ネットワークでハード調達・共同実証。</p>
+      <h3>ソリューション</h3>
+      <ul class="clean"><li>見守りAI／転倒検知（エッジAIカメラ）</li><li>記録・ケアプラン自動化（音声/NLP）</li><li>通訳・コミュニケーション支援</li><li>配置最適化／シフト自動化</li><li>移乗・歩行支援ロボティクス</li><li>排泄予測／IoTセンサー連携</li></ul>
+      <h3>収益化</h3><div><span class="tag">月額サブスク</span><span class="tag">成果連動</span><span class="tag">介護DX補助金活用</span></div></div>
+    <div class="card axiscard ax3"><h2>戦略軸③ ASEAN海外法人を活用した海外展開</h2>
+      <p>オフショアR&D・試作、現地アジャイルPoC、高度人材育成・派遣、半導体SC連携。</p>
+      <ul class="clean"><li><b>ミャンマー</b>：IT人材育成・語学教育連携</li><li><b>ベトナム</b>：設計・ソフト、AIアノテーション</li><li><b>インドネシア</b>：EMS／量産パートナー</li></ul>
+      <h3>KPI</h3><div><span class="tag">現地パートナー契約 3件</span><span class="tag">海外売上比率 10%(中期)</span></div></div>
+    <div class="card axiscard axM"><h2>応用：資本提携・M&Aによる事業拡大</h2>
+      <p>技術・人材の獲得、顧客アクセス基盤の強化、ソリューション価値の非連続な拡張。詳細は「買収パイプライン」タブ。</p>
+      <h3>ディール形態</h3><div><span class="tag">業務資本提携</span><span class="tag">少数持分出資</span><span class="tag">アクハイヤー</span><span class="tag">資産譲受</span><span class="tag">JV</span></div>
+      <h3>資金</h3><div><span class="tag">自己資金＋金融機関借入</span><span class="tag">共同投資(CVC等)</span></div></div>
+  </div>
+</section>
+
+<section class="tab" id="t-act">
+  <div class="card"><h2>初期90日アクションプラン（2026年6〜8月）</h2>
+    <p class="note">チェック／ステータス／メモはこの端末に自動保存されます（再読込しても保持）。</p>
+    <table><thead><tr><th style="width:34px">✓</th><th>アクション</th><th style="width:110px">担当</th><th style="width:90px">期限</th><th style="width:96px">状態</th></tr></thead>
+    <tbody id="act-body"></tbody></table>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="kpi"><div class="l">初期90日KPI：面談設定</div><div class="n">目標 20件</div></div>
+      <div class="kpi"><div class="l">初期90日KPI：PoC計画</div><div class="n">目標 2件</div></div>
+      <div class="kpi"><div class="l">初期90日KPI：協業意向確認</div><div class="n">目標 2件</div></div>
+    </div></div>
+</section>
+
+<section class="tab" id="t-road">
+  <div class="card"><h2>共創ロードマップ（2026年6月〜12月 ／ 7ヶ月）</h2>
+    <p class="muted">初期90日で成果の土台を構築し、後半で具体化。</p>
+    <div class="tl" id="road"></div></div>
+  <div class="card"><h2>定例スケジュール（毎月2時間 ／ サイボウズ「大幸さん」）</h2>
+    <p class="note">出所：サイボウズ登録予定（タイトル：大幸さん）。各回2時間。</p>
+    <table><thead><tr><th style="width:150px">日付</th><th>予定</th><th style="width:90px">状況</th></tr></thead><tbody id="sched-body"></tbody></table></div>
+  <div class="grid g2">
+    <div class="card"><h2>大幸氏の主な役割</h2><ul class="clean"><li>紹介/面談設定：キーパーソンへのアクセス</li><li>戦略助言：技術トレンド・市場ポテンシャル・M&A候補評価</li><li>実証設計：PoCの技術的フィージビリティ確認</li></ul></div>
+    <div class="card"><h2>YSTの主な役割</h2><ul class="clean"><li>実行主導：PM・ミーティング推進</li><li>契約実務：NDA・MOU/LOI・法務財務DD執行</li><li>オペ整備：介護現場での実証環境提供・運用体制構築</li></ul></div>
+  </div>
+</section>
+
+<section class="tab" id="t-kpi">
+  <div class="card"><h2>7ヶ月成果指標（KPI）トラッカー</h2>
+    <p class="note">「実績」欄に数値を入力すると進捗バーが更新され、自動保存されます。</p>
+    <table><thead><tr><th>KPI</th><th style="width:90px">目標</th><th style="width:120px">実績</th><th style="width:200px">進捗</th></tr></thead>
+    <tbody id="kpi-body"></tbody></table></div>
+</section>
+
+<section class="tab" id="t-log">
+  <div class="card"><h2>商談・面談ログ（経由を区別）</h2>
+    <div class="warnbox"><b>経由の区別：</b>大幸氏の紹介・関与による案件＝<b>成功報酬（顧問契約 第4条）の対象</b>。その他経由（例：トランスビジョン＝M&A総合研究所経由）は<b>相談案件</b>として別管理。<b>契約（2026/6/1）以降、大幸氏経由の商談・成約はまだゼロ。</b></div>
+    <p class="note">7ヶ月KPI「面談・紹介 ≥25件」は大幸氏経由が対象。自動保存されます。</p>
+    <div class="addrow" style="margin-bottom:8px">
+      <button class="btn ghost" onclick="setLogFilter('all')">全件</button>
+      <button class="btn ghost" onclick="setLogFilter('大幸氏')">大幸氏経由</button>
+      <button class="btn ghost" onclick="setLogFilter('その他')">その他経由（相談案件）</button>
+    </div>
+    <table><thead><tr><th style="width:90px">日付</th><th style="width:80px">経由</th><th>相手先 / キーパーソン</th><th style="width:110px">領域</th><th>内容・次アクション</th><th style="width:36px"></th></tr></thead>
+    <tbody id="log-body"></tbody></table>
+    <div class="addrow">
+      <input id="lg-date" type="date">
+      <select id="lg-src" style="max-width:120px"><option value="大幸氏">大幸氏経由</option><option value="その他">その他経由</option></select>
+      <input id="lg-name" placeholder="相手先 / キーパーソン">
+      <input id="lg-area" placeholder="領域(例:設計ハウス)">
+      <input id="lg-memo" placeholder="内容・次アクション">
+      <button class="btn" onclick="addLog()">＋ 追加</button>
+    </div></div>
+</section>
+<section class="tab" id="t-ma">
+  <div class="card">
+    <h2>買収候補①（議論対象）：トランスビジョン社 <span class="tag">IM・財務諸表 反映済</span> <span class="tag" style="background:#3a2b1a;color:var(--ma)">経由：M&A総研（大幸氏経由でない）</span></h2>
+    <div class="grid g2">
+      <div>
+        <p><b>事業</b>：DC（冷却・電源）の施工・保守・24/7、米Vertiv社の<b>日本唯一のASP</b>。プラントEng・技術翻訳(9言語)・CMMCも展開。設立1991年(第36期)、藤沢市、エンジニア約12名。譲渡理由＝事業承継。仲介＝M&A総合研究所。</p>
+        <h3>提示条件（売り手希望）</h3>
+        <p><span class="pricetag">8億円</span> <span class="muted">＝ 36期以降のDC収益ポテンシャル ＋ ASP/CMMC希少性プレミアム ＋ Net Cash</span></p>
+        <p class="note">現金2.51億を控除すると<b>事業価値（のれん）≒5.5億円</b>。ピーターズ氏(63歳)「過小評価・値下げ余地は限定的」、売却後も残留し成長支援の意向。<b>本件はM&A総合研究所経由であり、大幸氏の紹介・関与案件ではない（＝顧問成功報酬 第4条の対象外）。相談案件として別管理。</b></p>
+      </div>
+      <div>
+        <h3>財政状態（令和8年2月末・確定）</h3>
+        <table><tbody>
+          <tr><td>現金・預金</td><td>251百万円</td></tr>
+          <tr><td>純資産</td><td>249百万円</td></tr>
+          <tr><td>負債合計</td><td>16百万円</td></tr>
+        </tbody></table>
+        <p class="note">資産の大半が現金。実質「現金2.5億＋赤字の事業」を8億で取得する構図。</p>
+      </div>
+    </div>
+    <h3>業績推移（IMより・千円）</h3>
+    <table><thead><tr><th>期(3月期)</th><th>30期</th><th>31期</th><th>32期(ピーク)</th><th>33期</th><th>34期</th><th>35期'26</th><th>36期見通し</th></tr></thead>
+    <tbody>
+      <tr><td>売上高</td><td>144,459</td><td>221,654</td><td class="flag-lo">317,286</td><td>308,595</td><td>176,614</td><td>90,000</td><td>150,000〜500,000</td></tr>
+      <tr><td>営業利益</td><td>16,742</td><td>37,366</td><td class="flag-lo">72,694</td><td>61,025</td><td>22,958</td><td class="flag-hi">▲20,000</td><td>—</td></tr>
+      <tr><td>営業利益率</td><td>11.6%</td><td>16.9%</td><td>22.9%</td><td>19.8%</td><td>13.0%</td><td class="flag-hi">赤字</td><td>—</td></tr>
+      <tr><td>EBITDA</td><td>17,262</td><td>37,886</td><td>73,006</td><td>61,237</td><td>23,148</td><td class="flag-hi">—</td><td>—</td></tr>
+    </tbody></table>
+    <p class="note">直近35期実績(11ヶ月)：売上78.9百万・営業損失▲21.6百万・<b>当期純損失▲23.4百万</b>（議事録の▲14百万より悪化）。過去の高収益は<u>縮小方針の派遣事業</u>由来で、DC事業は転換途上。</p>
+    <div class="warnbox"><b>バリュエーション所見（割高の論点）：</b>のれん5.5億円の妥当性は<b>36期DC立上げの達成（売上1.5〜5.0億の幅広い見通し）が前提</b>。EV/EBITDAで見ると、ピーク32期(EBITDA73百万)なら約7.5倍＝妥当だが、直近34期(23百万)では約24倍、35期は赤字で倍率評価が不成立。<b>過去ピークは退出予定の派遣事業によるもので、未実証のDC収益に5.5億を払う構造</b>。取締役会向けROI説明の難所。割安な黒字候補との相対比較を推奨。</div>
+    <div class="grid g2">
+      <div><h3>強み・機会</h3><ul class="clean"><li>Vertiv ASP＝日本唯一の認定パートナー（排他的ポジション）</li><li>AWS・CBRE・Schneider等の外資系DCと直接取引（バイリンガル）</li><li>建設業許可(電気/電気通信 93223号)取得済</li><li>24/7：千葉DC1稼働→DC2(2026年中)→DC3(2027)、大阪・東京・北海道へ拡大協議</li><li>CMMC（CCP保有・国内希少）、嘉手納等の米軍基地案件</li></ul></div>
+      <div><h3>リスク</h3><ul class="clean"><li class="flag-hi">36期見通しの幅が広大(1.5〜5.0億)＝不確実性大</li><li class="flag-hi">Vertiv依存度が高い（DC売上比~80%）</li><li class="flag-mid">属人性（ピーターズ氏／有資格者2〜3名に依存）</li><li class="flag-mid">有資格エンジニア確保が成長ボトルネック</li><li class="flag-mid">過去高収益は縮小方針の派遣事業由来</li></ul></div>
+    </div>
+    <div class="warnbox" style="background:rgba(46,160,67,.10);border-color:var(--ok)"><b>YSシナジー（売り手が強調）：</b>YSタレントの海外エンジニア供給力（パイプライン1万名超）が同社の<b>成長ボトルネック＝有資格エンジニア確保</b>を直接解消。「YSがDC市場に参入する唯一の現実的手段」と位置付け。藤沢↔横浜で電車約30分、拠点統合も容易。→ <b>シナジーは大。論点は価格とDC立上げの確度</b>。交渉余地として固定対価を抑え<b>アーンアウト（36期業績連動の後払い）</b>でリスク分担する条件設計が有効。</div>
+  </div>
+
+  <div class="card">
+    <h2>より割安な代替候補の探索（3カテゴリ）</h2>
+    <p class="note">トランスビジョンは戦略適合性は高いが割高。下記を相対比較し、最もROIの高いディールを選定。</p>
+    <h3>カテゴリA：人材会社（上場・時価総額30億円以下／自社リストより）</h3>
+    <table><thead><tr><th>社名</th><th style="width:70px">コード</th><th style="width:70px">時価総額</th><th>事業</th><th style="width:130px">戦略適合</th></tr></thead>
+    <tbody>
+      <tr><td><b>ジェイテック</b></td><td>2479</td><td>約21億</td><td>機械・電気電子・ソフト設計のエンジニア派遣</td><td class="flag-lo">◎ 設計ハウス/半導体軸に直結</td></tr>
+      <tr><td><b>キャリア</b></td><td>6198</td><td>約21億</td><td>シニア/介護施設向け人材供給</td><td class="flag-lo">◎ 介護AI軸に直結</td></tr>
+      <tr><td>CRGホールディングス</td><td>7041</td><td>約18億</td><td>コールセンター派遣・製造請負・BPO</td><td class="flag-mid">○ 基盤補完</td></tr>
+      <tr><td>ビースタイルHD</td><td>302A</td><td>約17億</td><td>主婦向け人材(しゅふJOB)・派遣紹介</td><td class="flag-mid">○ 顧客基盤</td></tr>
+      <tr><td>ジンジブ</td><td>142A</td><td>約20億</td><td>高卒新卒採用支援・教育</td><td class="flag-mid">△ 教育ノウハウ</td></tr>
+      <tr><td>みらいワークス</td><td>6563</td><td>約30億</td><td>プロ人材(副業/フリーランス)マッチング</td><td class="flag-mid">○ 高度人材</td></tr>
+    </tbody></table>
+    <p class="note">注：グロース市場は2030年3月以降「上場5年で時価総額100億未満は上場廃止」基準。創業者/オーナー持株比率が高い銘柄が多く、TOB/相対交渉の難易度に差。最新値は株探・四季報で要確認。</p>
+    <h3>カテゴリB：データセンター保守（トランスビジョンの代替）</h3>
+    <ul class="clean">
+      <li><b>方針</b>：<u>黒字</u>のDC設備保守・電気設備工事の事業承継案件を狙い、トランスビジョンと相対比較。</li>
+      <li><b>相場感</b>：DCのM&A相場は「EBITDA×8〜9倍＋現預金−有利子負債」または「時価純資産＋営業利益×2〜5年」。→ 赤字のトランスビジョンは倍率評価が効かず割高に見える。</li>
+      <li><b>探索チャネル</b>：バトンズ／トランビ／M&Aサクシード等で「データセンター・電源/冷却・設備保守」の事業承継案件をスクリーニング（後継者不在の中小が多数）。</li>
+    </ul>
+    <h3>カテゴリC：設計ハウス（半導体）</h3>
+    <ul class="clean">
+      <li><b>方針</b>：国内ファブレス/LSI設計（例：DNPエル・エス・アイ・デザイン、GENUSION等）や小型上場の設計受託を、株探「ファブレス」テーマ・四季報でスクリーニング。後継者不在・小規模を優先。</li>
+      <li><b>狙い</b>：設計能力の内製化で「半導体軸」のソリューション価値を非連続に拡張。</li>
+    </ul>
+    <h3>参考：別途検討中の候補</h3>
+    <p>ディスカバリーグループ（人材／日本語学校・大阪／営業利益率約35%・累計就職6,000名）も買収検討中。<span class="flag-mid">リスク＝技人国・留学制度の厳格化、創業者(桝井氏)への属人性、業績の持続性</span>。介護AI×外国人材の軸とは親和。</p>
+  </div>
+
+  <div class="card">
+    <h2>選定基準（スクリーニング）</h2>
+    <div class="grid g3">
+      <div class="kpi"><div class="l">技術適合性</div><div class="t">YSTシナジー</div></div>
+      <div class="kpi"><div class="l">顧客基盤</div><div class="t">補完性・シナジー</div></div>
+      <div class="kpi"><div class="l">中長期収益性</div><div class="t">黒字・倍率裏付け</div></div>
+      <div class="kpi"><div class="l">経営陣の協働意欲</div><div class="t">カルチャー適合</div></div>
+      <div class="kpi"><div class="l">PMI容易性</div><div class="t">統合の現実性</div></div>
+      <div class="kpi"><div class="l">価格 / ROI</div><div class="t">取締役会説明可否</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>設計ハウス（M&Aによる設計能力の内製化）</h2>
+    <p>設計ハウス候補は<b>「ターゲット」タブの半導体デザインハウス10社</b>に集約（メガチップス、ザインエレクトロニクス、三栄ハイテックス 等）。設計受託先＝<b>顧客開拓先</b>であると同時に、設計能力を取り込む<b>M&Aターゲット</b>。独立系・商社系で規模100〜460名規模が中心で、トランスビジョンより小型・取り組みやすい候補も含む。</p>
+  </div>
+</section>
+
+<section class="tab" id="t-tgt">
+  <div class="card"><h2>半導体デザインハウス（顧客／M&Aターゲット） <span class="tag">10社</span></h2>
+    <p class="note">出所：YSTターゲットリスト_20260401「半導体デザインハウス」。設計受託先＝半導体軸の顧客開拓先であり、設計能力内製化のM&A候補。</p>
+    <table><thead><tr><th style="width:34px">No</th><th>企業名</th><th style="width:90px">推定従業員</th><th style="width:110px">区分</th><th>得意領域</th><th style="width:150px">主な市場</th></tr></thead><tbody id="dh-body"></tbody></table>
+  </div>
+  <div class="card"><h2>半導体業界 ターゲット <span class="tag" id="semi-count"></span></h2>
+    <p class="note">出所：同リスト「半導体業界（従業員100名以上）」。<span class="flag-lo">優先ターゲット</span>を強調。大幸氏ネットワークでトップダウンに関係構築。</p>
+    <div class="addrow" style="margin-bottom:10px"><input id="semi-filter" placeholder="絞り込み（社名・分類）" oninput="renderSemi()"><button class="btn ghost" onclick="togglePri()" id="pri-btn">優先のみ表示</button></div>
+    <table><thead><tr><th style="width:220px">分類</th><th>企業</th><th style="width:90px">従業員数</th><th style="width:60px">優先</th></tr></thead><tbody id="semi-body"></tbody></table>
+  </div>
+</section>
+
+<section class="tab" id="t-flyer">
+  <div class="card"><h2>営業ツール：大幸さん用 A4両面チラシ <span class="tag">半導体エンジニア育成・供給</span></h2>
+    <p>大幸さんが顧客（半導体メーカー・デザインハウス等）への紹介活動で使えるA4両面チラシを用意しました。テーマは<b>「YST × フェニカ大学（PSTC・Synopsys認定）によるベトナム半導体設計エンジニアの育成・供給」</b>。内部の価格交渉・個社名は伏せ、価値提案に絞っています。</p>
+    <div class="warnbox" style="background:rgba(46,160,67,.10);border-color:var(--ok)"><b>ファイル：</b>「大幸さんPJ」フォルダ内 <b>大幸さん営業チラシ_半導体エンジニア育成.html</b><br>ブラウザで開き、右上「印刷 / PDF保存」ボタン → A4両面で印刷、またはPDF化して配布できます。</div>
+    <h3>チラシの構成</h3>
+    <div class="grid g2">
+      <div class="kpi"><div class="l">表面</div><div class="t">価値提案：課題（採用難・工程ボトルネック・海外活用の品質）→ 解決策4点（Synopsys公認研修／モジュール式／技術＋日本語N3／一気通貫管理）→ 対応領域（Digital Backend・DFT・Analog L/O・Verification・Digital Flow）</div></div>
+      <div class="kpi"><div class="l">裏面</div><div class="t">PSTCの強み（W認証・Zebu/HAPS・NVIDIA GPU・実務家講師・2030年8,000人育成）→ 導入4ステップ → 進め方/スケジュール/雇用形態/ビザ対応 → 将来オフショア構想 → 連絡先</div></div>
+    </div>
+    <h3>大幸さん向け トーク骨子（口頭補足用）</h3>
+    <ul class="clean">
+      <li>入口は「現場が今すぐ欲しい即戦力（デジタルバックエンド等）」。人事には「将来のコア人材確保＋コストメリット」を二段構えで。</li>
+      <li>直接雇用はベトナムのトップ層を惹きつけ、定着率・ロイヤリティで派遣に勝る（派遣は質・定着が落ちやすい）。</li>
+      <li>まずは5〜10名規模で先行事例づくり。4-5月面談→半年研修→年末年始入社の約1年スパン。</li>
+      <li>2026年3月以降のビザ厳格化に対応した派遣先紐付け・在留設計まで一貫支援できる点が差別化。</li>
+    </ul>
+    <p class="note">連絡先（担当・TEL・Email）はチラシ内に空欄を設けています。確定情報で差し替えてご利用ください。</p>
+  </div>
+</section>
+
+<section class="tab" id="t-agenda">
+  <div class="card">
+    <h2>次回定例MTG アジェンダ（毎月2時間）</h2>
+    <ol style="padding-left:20px;line-height:2">
+      <li>戦略3軸の合意確認（半導体深化／介護AI／ASEAN）</li>
+      <li>初期90日アクションの担当・期限の確定</li>
+      <li>優先テーマのご助言：エッジAI×エッジコンピューティング／パワーデバイス・車載／実装・評価プロセス</li>
+      <li>ご紹介希望：半導体(設計/実装/テスト/材料)・ロボティクス・データセンター・投資家・海外企業</li>
+      <li><b>買収方針の協議</b>：トランスビジョン評価（割高論点・ROI・アーンアウト）と割安な代替候補の並行ソーシング</li>
+      <li>成功報酬の叩き台（顧問契約 第4条に基づく協議）</li>
+      <li>運営：毎月2時間・共同ダッシュボード運用・NDA等事務</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h2>買収議論のトーキングポイント</h2>
+    <ul class="clean">
+      <li>トランスビジョンは戦略適合（DC・Vertiv ASP・CMMC・米軍案件）とYSシナジー（エンジニア供給で成長ボトルネック解消）は<b>非常に大きい</b>。</li>
+      <li>一方、<b>実質5.5億円は未実証の36期DC収益（見通し幅1.5〜5.0億）が前提で割高</b>。直近35期は純損失▲23.4百万、過去高収益は撤退予定の派遣事業由来。取締役会説明にはROIの確度が鍵。</li>
+      <li>交渉策：<b>固定対価を圧縮＋アーンアウト</b>（DC売上/利益のマイルストーン達成で後払い）でダウンサイドを限定。Vertiv ASP・CMMCの希少性プレミアムは別建てで条件化。</li>
+      <li>大幸氏ネットワークで<b>黒字・割安なDC保守／設計ハウス／技術者派遣</b>を並行ソーシングし、相対比較で交渉力を確保。自社候補（ジェイテック=設計派遣、キャリア=介護人材 等）とも比較。</li>
+      <li>成功報酬：重要取引成立時に取引額のX%または定額／段階成果（MOU・受注・投資実行）連動のマイルストーン払いを叩き台に。<b>対象は大幸氏の紹介・関与案件のみ</b>（トランスビジョン等のその他経由は対象外。契約6/1以降、大幸氏経由の商談はまだゼロ）。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>議事メモ（次回MTG）</h2>
+    <textarea id="agenda-memo" rows="6" placeholder="決定事項・宿題・次アクションをここに記録（自動保存）"></textarea>
+  </div>
+</section>
+
+<footer>YST × 顧問大幸氏 共創PJ 管理ダッシュボード ／ 出典：戦略提案資料・顧問契約書・トランスビジョン議事録(2026.5.14)・トランスビジョンIM/財務諸表・人材会社リスト・ディスカバリーG検討レポート<br><span class="save-ind" id="saveind">✓ 保存しました</span></footer>
+</div>
+<script>
+const TABS=[["t-dash","ダッシュボード"],["t-strat","戦略3軸"],["t-act","90日アクション"],["t-road","ロードマップ"],["t-kpi","KPI"],["t-log","面談ログ"],["t-ma","買収パイプライン"],["t-tgt","ターゲット"],["t-flyer","営業ツール"],["t-agenda","MTGアジェンダ"]];
+const nav=document.getElementById('nav');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t[1];b.onclick=()=>show(t[0],b);if(i===0)b.classList.add('active');nav.appendChild(b);});
+function show(id,btn){document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+document.getElementById('t-dash').classList.add('active');
+const KEY='yst_taiko_pj_v1';
+let DB=JSON.parse(localStorage.getItem(KEY)||'{}');
+DB.acts=DB.acts||{}; DB.kpis=DB.kpis||{}; DB.logs=(DB.logs===undefined?null:DB.logs); DB.agendaMemo=DB.agendaMemo||'';
+function save(){localStorage.setItem(KEY,JSON.stringify(DB));const s=document.getElementById('saveind');s.classList.add('on');clearTimeout(window._st);window._st=setTimeout(()=>s.classList.remove('on'),1200);}
+const now=new Date();
+document.getElementById('today').innerHTML='本日 <b>'+now.toLocaleDateString('ja-JP')+'</b>';
+const ACTS=[
+ ["a1","顧問契約・費用合意 / NDA等の事務手続き完了","YST/大幸","6/30"],
+ ["a2","M&A候補ロングリスト作成（約50〜100社）","大幸/YST","6/30"],
+ ["a3","介護AI PoC候補 2施設の選定","YST","6/30"],
+ ["a4","キーパーソンとの面談・紹介（10件）","大幸","7/31"],
+ ["a5","優先テーマ確定（エッジAI/パワーデバイス/実装・評価）","大幸/YST","7/31"],
+ ["a6","ショートリスト絞り込み（約10社）","YST","7/31"],
+ ["a7","介護AI PoC 開始（2件）","YST","8/31"],
+ ["a8","海外パートナー探索の着手（ベトナム/DC連携）","YST","8/31"],
+ ["a9","トランスビジョン社内検討の回答 / 代替候補ソーシング","YST","7/31"],
+ ["a10","研修・セミナーの共同開催 企画確定（8月・10月開催分）","大幸/YST","6/15"]
+];
+const ST=["s-todo","s-prog","s-done"],STL=["未着手","進行中","完了"];
+const ab=document.getElementById('act-body');
+ACTS.forEach(a=>{
+ const st=DB.acts[a[0]]||{c:false,s:0};
+ const tr=document.createElement('tr');
+ tr.innerHTML='<td><input type="checkbox" class="chk" '+(st.c?'checked':'')+'></td><td>'+a[1]+'</td><td class="muted">'+a[2]+'</td><td class="muted">'+a[3]+'</td><td><button class="status '+ST[st.s]+'">'+STL[st.s]+'</button></td>';
+ const cb=tr.querySelector('input'),btn=tr.querySelector('.status');
+ cb.onchange=()=>{st.c=cb.checked;st.s=cb.checked?2:st.s;btn.className='status '+ST[st.s];btn.textContent=STL[st.s];DB.acts[a[0]]=st;save();refreshDash();};
+ btn.onclick=()=>{st.s=(st.s+1)%3;btn.className='status '+ST[st.s];btn.textContent=STL[st.s];st.c=(st.s===2);cb.checked=st.c;DB.acts[a[0]]=st;save();refreshDash();};
+ ab.appendChild(tr);
+});
+const KPIS=[["k1","面談・紹介",25,"件"],["k2","PoC・実証",3,"件"],["k3","基本合意(MOU)",2,"件"],["k4","顧客受注・契約",1,"件"],["k5","共同PR・露出",3,"件"]];
+const kb=document.getElementById('kpi-body');
+KPIS.forEach(k=>{
+ const v=DB.kpis[k[0]]||0;
+ const tr=document.createElement('tr');
+ const pct=Math.min(100,Math.round(v/k[2]*100));
+ tr.innerHTML='<td>'+k[1]+'</td><td>≥ '+k[2]+' '+k[3]+'</td><td><input type="number" min="0" value="'+v+'" style="width:80px"></td><td><div class="bar"><i style="width:'+pct+'%"></i></div><span class="note">'+pct+'%</span></td>';
+ const inp=tr.querySelector('input'),bar=tr.querySelector('.bar>i'),lbl=tr.querySelector('.note');
+ inp.oninput=()=>{const n=+inp.value||0;DB.kpis[k[0]]=n;const p=Math.min(100,Math.round(n/k[2]*100));bar.style.width=p+'%';lbl.textContent=p+'%';save();refreshDash();};
+ kb.appendChild(tr);
+});
+const ROAD=[
+ ["2026.06","キックオフ／候補リスト100社／介護AI PoC候補2施設選定／研修・セミナー企画確定(中旬)"],
+ ["2026.07","面談・紹介10件／優先テーマ確定／契約・費用合意"],
+ ["2026.08","PoC開始2件／海外パートナー探索着手／研修・セミナー共同開催①"],
+ ["2026.09","基本合意(MOU)1件／介護AI導入1施設開始"],
+ ["2026.10","海外PoC 1件開始／投資・提携候補のDD着手／研修・セミナー共同開催②"],
+ ["2026.11","投資・買収LOI 1件／顧客契約1件"],
+ ["2026.12","成果レビュー／来期計画／成功報酬取り決め"]
+];
+const rd=document.getElementById('road');
+ROAD.forEach(r=>{const d=document.createElement('div');d.className='ev';d.innerHTML='<div class="mo">'+r[0]+'</div><div>'+r[1]+'</div>';rd.appendChild(d);});
+const DEFLOG=[{d:"2026/05/14",s:"その他",n:"トランスビジョン ピーターズ社長",a:"DC/買収",m:"買収検討の継続協議。提示8億(実質5.5億)。社内持ち帰り。M&A総研経由(大幸氏経由でない)。"}];
+if(DB.logs===null)DB.logs=DEFLOG.slice();
+let logFilter='all';
+function setLogFilter(v){logFilter=v;renderLog();}
+window.setLogFilter=setLogFilter;
+function renderLog(){const lb=document.getElementById('log-body');lb.innerHTML='';
+ DB.logs.forEach((g,i)=>{const s=g.s||'その他';if(logFilter!=='all'&&s!==logFilter)return;const kk=(s==='大幸氏');const tr=document.createElement('tr');tr.innerHTML='<td class="muted">'+g.d+'</td><td>'+(kk?'<span class="flag-lo">大幸氏</span>':'<span class="muted">その他</span>')+'</td><td>'+g.n+'</td><td>'+g.a+'</td><td>'+g.m+'</td><td><button class="del">×</button></td>';tr.querySelector('.del').onclick=()=>{DB.logs.splice(i,1);save();renderLog();refreshDash();};lb.appendChild(tr);});}
+function addLog(){const d=document.getElementById('lg-date').value,s=document.getElementById('lg-src').value,n=document.getElementById('lg-name').value,a=document.getElementById('lg-area').value,m=document.getElementById('lg-memo').value;if(!n)return;DB.logs.push({d:d||now.toLocaleDateString('ja-JP'),s:s,n:n,a:a,m:m});['lg-name','lg-area','lg-memo'].forEach(id=>document.getElementById(id).value='');save();renderLog();refreshDash();}
+window.addLog=addLog;
+renderLog();
+const am=document.getElementById('agenda-memo');am.value=DB.agendaMemo;am.oninput=()=>{DB.agendaMemo=am.value;save();};
+function refreshDash(){
+ let done=0;ACTS.forEach(a=>{if((DB.acts[a[0]]||{}).s===2)done++;});
+ const pct=Math.round(done/ACTS.length*100);
+ document.getElementById('d-actpct').textContent=pct+'%';
+ document.getElementById('d-actbar').style.width=pct+'%';
+ document.getElementById('d-actcnt').textContent=done+' / '+ACTS.length+' 完了';
+ const _tot=DB.logs?DB.logs.length:0;const _kk=DB.logs?DB.logs.filter(g=>(g.s||'その他')==='大幸氏').length:0;const _e1=document.getElementById('d-logkk');if(_e1)_e1.textContent=_kk;const _e2=document.getElementById('d-logsub');if(_e2)_e2.textContent='総ログ '+_tot+'件 ／ 目標≥25';
+ const dk=document.getElementById('d-kpi');dk.innerHTML='';
+ KPIS.forEach(k=>{const v=DB.kpis[k[0]]||0;const p=Math.min(100,Math.round(v/k[2]*100));const el=document.createElement('div');el.className='kpi';el.innerHTML='<div class="l">'+k[1]+'</div><div class="n">'+v+' <span style="font-size:13px;color:var(--mut)">/ '+k[2]+k[3]+'</span></div><div class="bar"><i style="width:'+p+'%"></i></div>';dk.appendChild(el);});
+}
+// 定例スケジュール
+const MEET=[
+ ["2026-05-11","2026/05/11(月)","定例"],
+ ["2026-05-20","2026/05/20(水)","定例(調整)"],
+ ["2026-06-02","2026/06/02(火)","定例（キックオフ）"],
+ ["2026-07-10","2026/07/10(金)","定例"],
+ ["2026-07-15","2026/07/15(水)","定例(調整)"],
+ ["2026-08-04","2026/08/04(火)","定例 ＋ 研修・セミナー共催①"],
+ ["2026-09-01","2026/09/01(火)","定例"],
+ ["2026-10-06","2026/10/06(火)","定例 ＋ 研修・セミナー共催②"],
+ ["2026-11-04","2026/11/04(水)","定例"],
+ ["2026-12-01","2026/12/01(火)","定例（成果レビュー）"]
+];
+(function(){const sb=document.getElementById('sched-body');if(!sb)return;const t=new Date();t.setHours(0,0,0,0);let nx='';
+ MEET.forEach(m=>{const d=new Date(m[0]+'T00:00:00');const past=d<t;if(!past&&!nx)nx=m[1].slice(5);
+  const tr=document.createElement('tr');tr.innerHTML='<td class="'+(past?'muted':'')+'">'+m[1]+'</td><td class="'+(past?'muted':'')+'">'+m[2]+'</td><td>'+(past?'<span class="muted">実施済</span>':'<span class="flag-lo">予定</span>')+'</td>';sb.appendChild(tr);});
+ const dn=document.getElementById('d-next');if(dn)dn.textContent=nx||'—';})();
+// ターゲット：半導体デザインハウス
+const DH=[["1", "メガチップス", "約460名", "中堅ファブレス", "特定用途向けASIC。近年はAIや産業機器へシフト。", "コンシューマー、AI、産業"], ["2", "DTSインサイト", "約370名", "グループ系", "LSI設計＋組込みソフト。システム全体での受託に強み。", "車載、医療、計測機器"], ["3", "三栄ハイテックス", "約350名", "独立系", "独立系最大級。 アナログ・デジタル・レイアウト全てに対応。", "全般（通信、車載、家電）"], ["4", "Wave Technology", "約220名", "独立系", "高周波（RF）・アナログ・電源に特化。無線系に強い。", "通信、パワー半導体、産機"], ["5", "テセラ・テクノロジー", "約180名", "独立系", "LSI設計＋評価ボード開発。試作・検証プロセスに強い。", "車載、IoT、インフラ"], ["6", "サンコー・セミコンダクタ", "約180名", "商社系", "リョーサン菱洋HD傘下。商社の商流を活かした設計受託。", "家電、産業機器、OA"], ["7", "ザインエレクトロニクス", "約150名", "独立系ファブレス", "高速インターフェース（V-by-One）の世界的リーダー。", "ディスプレイ、車載カメラ"], ["8", "菱電デザイン", "約150名", "商社系", "三菱電機・菱電商事系。パワー半導体や制御LSIに強い。", "産業機器、電力、車載"], ["9", "ジーデバイステクノロジー", "約130名", "独立系", "旧東芝系の高い品質管理。車載・産業向けの設計受託。", "車載、産業用LSI"], ["10", "アクセル", "約100名", "独立系ファブレス", "グラフィックスLSIからAI、ブロックチェーンへ拡大。", "アミューズメント、AI"]];
+(function(){const b=document.getElementById('dh-body');if(!b)return;DH.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML='<td class="muted">'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td><td class="muted">'+r[5]+'</td>';b.appendChild(tr);});})();
+// ターゲット：半導体業界
+const SEMI=[["デバイス", "ジャパンセミコンダクター", "2100", 1], ["デバイス", "セイコーインスツル", "2200", 1], ["デバイス", "サンケン電気", "8000", 1], ["デバイス", "新電元工業", "5000", 1], ["デバイス", "ミネベアミツミ", "90000", 1], ["ファウンドリ", "TPSCo", "1800", 0], ["次世代半導体・ファウンドリ", "Rapidus", "1024", 0], ["次世代半導体・ファウンドリ", "JASM（TSMC熊本）", "1700", 0], ["次世代半導体・ファウンドリ", "JSファウンドリ", "500", 0], ["半導体デバイスメーカー", "ルネサスエレクトロニクス", "21000", 1], ["半導体デバイスメーカー", "ソニーセミコンダクタソリューションズ", "12000", 1], ["半導体デバイスメーカー", "ローム", "23000", 1], ["半導体デバイスメーカー", "キオクシア", "15000", 1], ["半導体デバイスメーカー", "東芝デバイス＆ストレージ", "20000", 1], ["半導体デバイスメーカー", "富士電機", "27000", 1], ["半導体デバイスメーカー", "三菱電機（半導体部門）", "145000", 1], ["半導体デバイスメーカー", "京セラ", "80000", 1], ["半導体デバイスメーカー", "NTTイノベーティブデバイス", "1000", 1], ["半導体検査・計測装置メーカー", "日本電子 (JEOL)", "3400", 0], ["半導体検査・計測装置メーカー", "テラダイイン", "6000", 0], ["半導体検査・計測装置メーカー", "レーザーテック", "1000", 0], ["半導体検査・計測装置メーカー", "ホーチキ（電子部門）", "1400", 0], ["半導体材料・化学メーカー", "大日本印刷 (DNP)", "36000", 0], ["半導体材料・化学メーカー", "凸版印刷 (TOPPAN)", "50000", 0], ["半導体材料・化学メーカー", "HOYA", "36000", 0], ["半導体材料・化学メーカー", "フェローテック", "7000", 0], ["半導体材料メーカー", "信越化学工業", "26000", 0], ["半導体材料メーカー", "SUMCO", "10000", 0], ["半導体材料メーカー", "JSR", "10000", 0], ["半導体材料メーカー", "東京応化工業", "2000", 0], ["半導体材料メーカー", "ADEKA", "5000", 0], ["半導体材料メーカー", "レゾナック（旧昭和電工）", "23000", 0], ["半導体材料メーカー", "三菱ケミカル", "70000", 0], ["半導体材料メーカー", "富士フイルム", "73000", 0], ["半導体材料メーカー", "三井化学", "19000", 0], ["半導体材料メーカー", "新光電気工業", "5349", 0], ["半導体製造装置メーカー", "東京エレクトロン", "20000", 0], ["半導体製造装置メーカー", "SCREENホールディングス", "6000", 0], ["半導体製造装置メーカー", "ディスコ", "4000", 0], ["半導体製造装置メーカー", "アドバンテスト", "9000", 0], ["半導体製造装置メーカー", "KOKUSAI ELECTRIC", "2000", 0], ["半導体製造装置メーカー", "キヤノン（露光装置）", "170000", 0], ["半導体製造装置メーカー", "ニコン（露光装置）", "19000", 0], ["半導体製造装置メーカー", "芝浦メカトロニクス", "2000", 0], ["半導体製造装置メーカー", "東京精密", "2400", 0], ["半導体製造装置メーカー", "レーザーテック", "1000", 0], ["半導体製造装置メーカー", "三益半導体工業", "1166", 0], ["半導体製造装置メーカー", "アルバック (ULVAC)", "6400", 0], ["半導体製造装置メーカー", "荏原製作所", "19000", 0], ["半導体製造装置メーカー", "TOWA", "1700", 0], ["半導体製造装置メーカー", "ローツェ", "1000", 0], ["半導体製造装置メーカー", "オルガノ", "2400", 0], ["半導体製造装置メーカー", "アピックヤマダ", "500", 0], ["半導体部品・関連企業", "イビデン", "14000", 0], ["半導体部品・関連企業", "TDK", "100000", 0], ["半導体部品・関連企業", "村田製作所", "75000", 0], ["半導体部品・関連企業", "太陽誘電", "22000", 0], ["半導体部品・関連企業", "日本電産（ニデック）", "110000", 0], ["半導体部品・関連企業", "ミネベアミツミ", "90000", 0], ["半導体部品・関連企業", "日本ケミコン", "7000", 0], ["真空機器", "キヤノンアネルバ", "1000", 0], ["精密加工装置", "ワイエイシイ", "800", 0], ["設計", "ソシオネクスト", "2500", 0], ["設計支援", "図研", "1500", 0], ["OSAT（受託梱包・検査）", "ジェイデバイス", "4000", 0], ["OSAT（受託梱包・検査）", "テラプローブ", "1000", 0], ["OSAT（受託梱包・検査）", "アムコール・テクノロジー・ジャパン", "3000", 0], ["搬送システム", "ダイフク", "13000", 0], ["搬送システム", "村田機械（ムラテック）", "8000", 0], ["精密部品", "ハーモニック・ドライブ・システムズ", "1000", 0], ["専門材料・周辺機器メーカー", "住友ベークライト", "7981", 0], ["専門材料・周辺機器メーカー", "トクヤマ", "5782", 0], ["専門材料・周辺機器メーカー", "信越ポリマー", "4356", 0], ["専門材料・周辺機器メーカー", "関東化学", "1058", 0], ["専門材料・周辺機器メーカー", "ステラケミファ", "694", 0], ["専門材料・周辺機器メーカー", "ミライアル", "450", 0]];
+let priOnly=false;
+function togglePri(){priOnly=!priOnly;const btn=document.getElementById('pri-btn');if(btn)btn.textContent=priOnly?'全件表示':'優先のみ表示';renderSemi();}
+function renderSemi(){const fb=document.getElementById('semi-filter');if(!fb)return;const q=(fb.value||'').toLowerCase();const b=document.getElementById('semi-body');b.innerHTML='';let n=0;
+ SEMI.forEach(r=>{if(priOnly&&!r[3])return;const hay=(r[0]+r[1]).toLowerCase();if(q&&hay.indexOf(q)<0)return;n++;const tr=document.createElement('tr');tr.innerHTML='<td class="muted">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+(r[3]?'<span class="flag-lo">優先</span>':'')+'</td>';b.appendChild(tr);});
+ const c=document.getElementById('semi-count');if(c)c.textContent=n+'社';}
+window.togglePri=togglePri;window.renderSemi=renderSemi;renderSemi();
+refreshDash();
+</script>
+</body>
+</html>

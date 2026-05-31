@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YS TALENT × Phenikaa｜半導体設計エンジニア 育成・供給</title>
+<style>
+:root{color-scheme:light;
+ --ink:#15233b;--mut:#5b6b82;--line:#d9e0ea;--bg:#ffffff;
+ --brand:#0b4aa2;--brand2:#1f7ae0;--accent:#e8732a;--soft:#f2f6fc;--soft2:#eef7f0;--ok:#1f9d57;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-serif;color:var(--ink);background:#7a8699;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.toolbar{position:sticky;top:0;background:#15233b;color:#fff;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:13px}
+.toolbar button{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer}
+.page{width:210mm;min-height:297mm;background:var(--bg);margin:16px auto;padding:14mm 13mm;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.25);overflow:hidden}
+.brandbar{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--brand);padding-bottom:10px;margin-bottom:14px}
+.brandbar .lhs{font-size:12px;color:var(--mut);letter-spacing:.06em}
+.brandbar .logo{font-size:20px;font-weight:800;color:var(--brand);letter-spacing:.02em}
+.brandbar .logo span{color:var(--accent)}
+.brandbar .rhs{text-align:right;font-size:11px;color:var(--mut)}
+.hero{background:linear-gradient(110deg,var(--brand),var(--brand2));color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.hero .eyebrow{font-size:12px;letter-spacing:.14em;opacity:.9;font-weight:700}
+.hero h1{font-size:27px;line-height:1.3;margin:6px 0 8px;font-weight:800}
+.hero h1 b{color:#ffd9a8}
+.hero p{font-size:13.5px;opacity:.96}
+.sec-h{font-size:15px;font-weight:800;color:var(--brand);margin:16px 0 9px;padding-left:11px;border-left:5px solid var(--accent)}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:1fr 1fr 1fr}
+.g4{grid-template-columns:1fr 1fr;}
+.pain{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.pain h4{font-size:13px;color:#b23b16;margin-bottom:3px}
+.pain p{font-size:11.5px;color:var(--mut)}
+.sol{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand2);border-radius:10px;padding:12px 13px}
+.sol .n{display:inline-block;width:22px;height:22px;background:var(--brand);color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:12px;font-weight:800;margin-bottom:6px}
+.sol h4{font-size:13.5px;margin-bottom:4px}
+.sol p{font-size:11.5px;color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-size:12px;color:var(--ink)}
+.chip b{color:var(--brand)}
+.callout{background:var(--soft2);border:1px solid #cfe8d6;border-radius:10px;padding:12px 14px;font-size:12.5px;color:#1d5e38}
+.flow{display:flex;gap:8px;align-items:stretch}
+.step{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 10px;position:relative;text-align:center}
+.step .s{font-size:11px;color:var(--accent);font-weight:800}
+.step h4{font-size:12.5px;margin:3px 0 3px}
+.step p{font-size:10.5px;color:var(--mut)}
+.arrow{display:flex;align-items:center;color:var(--brand2);font-weight:800;font-size:18px}
+.two{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+.feat{font-size:12px;color:var(--ink);margin:5px 0;padding-left:18px;position:relative}
+.feat::before{content:"\2714";position:absolute;left:0;color:var(--ok);font-size:11px;top:1px}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.box h4{font-size:13px;color:var(--brand);margin-bottom:6px}
+.specs{font-size:11px;color:var(--mut);line-height:1.7}
+.cta{background:var(--brand);color:#fff;border-radius:14px;padding:16px 20px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.cta .l h3{font-size:16px;margin-bottom:4px}
+.cta .l p{font-size:11.5px;opacity:.92}
+.cta .r{text-align:right;font-size:12px;line-height:1.7;white-space:nowrap}
+.cta .r b{font-size:14px}
+.foot{position:absolute;bottom:8mm;left:13mm;right:13mm;border-top:1px solid var(--line);padding-top:6px;font-size:9.5px;color:#9aa7b8;display:flex;justify-content:space-between}
+.kfig{display:flex;gap:10px;margin:8px 0}
+.kfig .k{flex:1;background:var(--soft);border-radius:10px;padding:10px;text-align:center}
+.kfig .k .v{font-size:19px;font-weight:800;color:var(--brand)}
+.kfig .k .t{font-size:10px;color:var(--mut)}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .page{margin:0;box-shadow:none;width:auto;min-height:auto;page-break-after:always}
+ .page:last-child{page-break-after:auto}
+ @page{size:A4;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">このチラシはA4両面で印刷できます（ブラウザの印刷 → 送信先「PDFに保存」または両面印刷）。<button onclick="window.print()">🖨 印刷 / PDF保存</button></div>
+
+<!-- ===== 表面 ===== -->
+<div class="page">
+  <div class="brandbar">
+    <div class="lhs">SEMICONDUCTOR ENGINEER<br>DEVELOPMENT &amp; SUPPLY</div>
+    <div class="logo">YS TALENT <span>×</span> Phenikaa University</div>
+    <div class="rhs">人材 × テクノロジー<br>ソリューション</div>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">ベトナム発・即戦力の半導体設計エンジニア</div>
+    <h1>半導体設計エンジニアの<br><b>育成・供給</b>ソリューション</h1>
+    <p>ベトナム トップ工科系「フェニカ大学（PSTC）」の <b>Synopsys公認カリキュラム</b> ＋ 日本語教育で育成した即戦力を、貴社の開発現場へ。採用難・若手不足・工程ボトルネックを、計画的な人材パイプラインで解消します。</p>
+  </div>
+
+  <div class="sec-h">こんな課題はありませんか？</div>
+  <div class="grid g3">
+    <div class="pain"><h4>採用難・若手不足</h4><p>国内での設計エンジニア採用が困難。未経験者の立ち上がりに時間がかかり、需要に応じた即戦力確保が難しい。</p></div>
+    <div class="pain"><h4>特定工程のボトルネック</h4><p>P&amp;R・DFT・アナログレイアウト・検証などの専門人材が不足し、受注・業務拡大の制約になっている。</p></div>
+    <div class="pain"><h4>海外活用の品質・教育負担</h4><p>海外リソースは活用したいが、スキルのばらつき・日本語・教育の一貫性、現場メンターの負担が課題。</p></div>
+  </div>
+
+  <div class="sec-h">YST × PSTC が提供する解決策</div>
+  <div class="grid g4">
+    <div class="sol"><span class="n">1</span><h4>実務直結トレーニング</h4><p>世界標準EDA「Synopsys」公認の教材・認証プログラム。配属初日から実務に入れるスキルレベルを育成。</p></div>
+    <div class="sol"><span class="n">2</span><h4>モジュール式カリキュラム</h4><p>P&amp;R／DFT／アナログL/O／検証など、貴社のニーズに合わせて重点モジュールを柔軟に組み合わせ。</p></div>
+    <div class="sol"><span class="n">3</span><h4>技術＋日本語をセット提供</h4><p>約4ヶ月の技術特訓と日本語教育（目標N3）を並行。最終試験（技術＋語学）の品質ゲートを通過した人材のみ推薦。</p></div>
+    <div class="sol"><span class="n">4</span><h4>採用〜配属の一気通貫管理</h4><p>スクリーニング→研修→品質チェック→配属までを一元管理。品質と定着率を両立。</p></div>
+  </div>
+
+  <div class="sec-h">対応する設計領域</div>
+  <div class="chips">
+    <span class="chip"><b>Digital Backend</b>（P&amp;R・CTS・STA・DRC/LVS・Signoff）</span>
+    <span class="chip"><b>DFT</b></span>
+    <span class="chip"><b>Analog IC Design &amp; Layout</b>（LPE/寄生抽出）</span>
+    <span class="chip"><b>Verification</b>（SystemVerilog / UVM）</span>
+    <span class="chip"><b>Digital Flow</b>（RTL→GDSII 一気通貫）</span>
+  </div>
+
+  <div class="callout" style="margin-top:14px"><b>なぜ即戦力なのか：</b>EDAベンダー提供の“誰でも完結するラボ”ではなく、<b>現場で発生する課題を自力で解析・解決するプロセス</b>を含む実践演習で育成。配線性・タイミング収束、複雑なクロックツリー解析（CTS）など、実プロジェクトに耐えるレベルを重視しています。</div>
+
+  <div class="foot"><span>YS TALENT Inc. ／ 顧問 大幸 秀成</span><span>半導体設計エンジニア 育成・供給ソリューション</span></div>
+</div>
+
+<!-- ===== 裏面 ===== -->
+<div class="page">
+  <div class="brandbar">
+    <div class="lhs">TRAINING MODEL<br>&amp; PARTNERSHIP</div>
+    <div class="logo">YS TALENT <span>×</span> Phenikaa University</div>
+    <div class="rhs">ベトナム・ハノイ<br>PSTC（半導体育成センター）</div>
+  </div>
+
+  <div class="sec-h">フェニカ大学 PSTC の強み</div>
+  <div class="two">
+    <div>
+      <div class="feat"><b>Synopsys公認・W認証</b>：修了証はPSTCとSynopsysの連名で発行（国際的なスキル証明）</div>
+      <div class="feat"><b>ハイエンド検証設備</b>：Zebu Server 4/5・HAPS、AI/HPC向けNVIDIA GPUサーバー群</div>
+      <div class="feat"><b>最先端インフラ</b>：2nmプロセス等を見据えた実習環境</div>
+      <div class="feat"><b>実務家による講師陣</b>：元Viettel 5G SoC開発責任者ら業界エキスパート＋Synopsys専門講師</div>
+      <div class="feat"><b>豊富な人材プール</b>：ベトナム主要大学（HUST等）と連携した優秀層のスクリーニング</div>
+    </div>
+    <div class="box">
+      <h4>国家規模のプロジェクト</h4>
+      <div class="specs">ベトナムは <b>2030年までに半導体設計エンジニア8,000人超</b>の育成を国家目標に掲げ、台湾の半導体エコシステムと連携。理系大卒は基本的に英語対応可で、若く優秀な人材層が厚い市場です。</div>
+      <div class="kfig">
+        <div class="k"><div class="v">5–10名</div><div class="t">チーム導入の目安</div></div>
+        <div class="k"><div class="v">約4ヶ月</div><div class="t">技術特訓期間</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h">導入プロセス</div>
+  <div class="flow">
+    <div class="step"><div class="s">STEP 1</div><h4>選抜・スクリーニング</h4><p>GPA・基礎学力・適性で選抜。貴社の技術スタックに合わせ基準設定。</p></div>
+    <div class="arrow">›</div>
+    <div class="step"><div class="s">STEP 2</div><h4>技術特訓（約4ヶ月）</h4><p>Synopsys認定コースで重点モジュールを習得。実設計フローで演習。</p></div>
+    <div class="arrow">›</div>
+    <div class="step"><div class="s">STEP 3</div><h4>日本語＋品質ゲート</h4><p>日本語N3目標。技術＋語学の最終試験を通過した人材のみ推薦。</p></div>
+    <div class="arrow">›</div>
+    <div class="step"><div class="s">STEP 4</div><h4>内定・配属</h4><p>早期の条件付き内定で優秀層を確保。配属初日から実務へ。</p></div>
+  </div>
+
+  <div class="two" style="margin-top:14px">
+    <div class="box">
+      <h4>進め方・スケジュール</h4>
+      <div class="specs">
+        ・<b>最小5名〜最大10名</b>のチーム単位（デジタルバックエンドから開始可）で段階的に拡大<br>
+        ・<b>4〜5月</b>に面談 → <b>約半年</b>の技術・日本語研修 → <b>年末〜年始</b>に入社（約1年スパン）<br>
+        ・<b>雇用形態</b>：直接雇用（定着・ロイヤリティ向上）／派遣 いずれも対応<br>
+        ・<b>ビザ運用</b>：2026年3月以降の厳格化に対応（派遣先紐付け・在留期間の設計まで一貫サポート）
+      </div>
+    </div>
+    <div class="box">
+      <h4>将来構想：オフショア展開</h4>
+      <div class="specs">来日メンバーが貴社の文化・技術を習得し、数年後に<b>ブリッジエンジニア</b>として活躍。将来的には<b>ベトナム現地のセキュアな開発拠点（オフショア）</b>へ発展させる構想まで描けます。</div>
+      <div class="callout" style="margin-top:8px;font-size:11.5px">投資の目安：<b>1名あたり概算 80万円〜</b>（研修・教材・渡航等込／規模・要件により変動）。立ち上げ期は単価を抑えたリスク共有型の提案も可能です。</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="l">
+      <h3>まずは、無料相談・ベトナム視察／面接のご提案から。</h3>
+      <p>貴社の必要工程・人数・ツール環境をお聞かせください。要件定義 → 候補者スクリーニング → カリキュラム調整まで、一気通貫でご支援します。</p>
+    </div>
+    <div class="r">
+      <b>YS TALENT Inc.</b><br>
+      顧問　大幸 秀成<br>
+      担当：＿＿＿＿＿＿<br>
+      TEL：＿＿＿／Email：＿＿＿
+    </div>
+  </div>
+
+  <div class="foot"><span>YS TALENT Inc.（株式会社YSタレント）</span><span>ASEANネットワーク：ベトナム・ミャンマー・インドネシア</span></div>
+</div>
+</body>
+</html>
