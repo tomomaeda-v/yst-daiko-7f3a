@@ -9,58 +9,61 @@
  --ink:#15233b;--mut:#5b6b82;--line:#d9e0ea;--bg:#ffffff;
  --brand:#0b4aa2;--brand2:#1f7ae0;--accent:#e8732a;--soft:#f2f6fc;--soft2:#eef7f0;--ok:#1f9d57;}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-serif;color:var(--ink);background:#7a8699;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-serif;color:var(--ink);background:#7a8699;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .toolbar{position:sticky;top:0;background:#15233b;color:#fff;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:13px}
 .toolbar button{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer}
-.page{width:210mm;min-height:297mm;background:var(--bg);margin:16px auto;padding:14mm 13mm;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.25);overflow:hidden}
-.brandbar{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--brand);padding-bottom:10px;margin-bottom:14px}
-.brandbar .lhs{font-size:12px;color:var(--mut);letter-spacing:.06em}
-.brandbar .logo{font-size:20px;font-weight:800;color:var(--brand);letter-spacing:.02em}
+.page{width:210mm;min-height:297mm;background:var(--bg);margin:16px auto;padding:13mm 12mm;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.25);overflow:hidden}
+.brandbar{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--brand);padding-bottom:9px;margin-bottom:12px}
+.brandbar .lhs{font-size:11px;color:var(--mut);letter-spacing:.06em}
+.brandbar .logo{font-size:19px;font-weight:800;color:var(--brand)}
 .brandbar .logo span{color:var(--accent)}
-.brandbar .rhs{text-align:right;font-size:11px;color:var(--mut)}
-.hero{background:linear-gradient(110deg,var(--brand),var(--brand2));color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:16px}
-.hero .eyebrow{font-size:12px;letter-spacing:.14em;opacity:.9;font-weight:700}
-.hero h1{font-size:27px;line-height:1.3;margin:6px 0 8px;font-weight:800}
+.brandbar .rhs{text-align:right;font-size:10.5px;color:var(--mut)}
+.hero{background:linear-gradient(110deg,var(--brand),var(--brand2));color:#fff;border-radius:13px;padding:17px 20px;margin-bottom:13px}
+.hero .eyebrow{font-size:11.5px;letter-spacing:.12em;opacity:.9;font-weight:700}
+.hero h1{font-size:25px;line-height:1.3;margin:5px 0 7px;font-weight:800}
 .hero h1 b{color:#ffd9a8}
-.hero p{font-size:13.5px;opacity:.96}
-.sec-h{font-size:15px;font-weight:800;color:var(--brand);margin:16px 0 9px;padding-left:11px;border-left:5px solid var(--accent)}
-.grid{display:grid;gap:10px}
+.hero p{font-size:12.5px;opacity:.96}
+.sec-h{font-size:14px;font-weight:800;color:var(--brand);margin:13px 0 8px;padding-left:10px;border-left:5px solid var(--accent)}
+.grid{display:grid;gap:9px}
 .g2{grid-template-columns:1fr 1fr}
 .g3{grid-template-columns:1fr 1fr 1fr}
 .g4{grid-template-columns:1fr 1fr;}
-.pain{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
-.pain h4{font-size:13px;color:#b23b16;margin-bottom:3px}
-.pain p{font-size:11.5px;color:var(--mut)}
-.sol{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand2);border-radius:10px;padding:12px 13px}
-.sol .n{display:inline-block;width:22px;height:22px;background:var(--brand);color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:12px;font-weight:800;margin-bottom:6px}
-.sol h4{font-size:13.5px;margin-bottom:4px}
-.sol p{font-size:11.5px;color:var(--mut)}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
-.chip{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-size:12px;color:var(--ink)}
+.pain{background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:11px 12px}
+.pain h4{font-size:12.5px;color:#b23b16;margin-bottom:3px}
+.pain p{font-size:11px;color:var(--mut)}
+.sol{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand2);border-radius:9px;padding:11px 12px}
+.sol .n{display:inline-block;width:21px;height:21px;background:var(--brand);color:#fff;border-radius:50%;text-align:center;line-height:21px;font-size:12px;font-weight:800;margin-bottom:5px}
+.sol h4{font-size:13px;margin-bottom:3px}
+.sol p{font-size:11px;color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(--ink)}
 .chip b{color:var(--brand)}
-.callout{background:var(--soft2);border:1px solid #cfe8d6;border-radius:10px;padding:12px 14px;font-size:12.5px;color:#1d5e38}
-.flow{display:flex;gap:8px;align-items:stretch}
-.step{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 10px;position:relative;text-align:center}
-.step .s{font-size:11px;color:var(--accent);font-weight:800}
-.step h4{font-size:12.5px;margin:3px 0 3px}
-.step p{font-size:10.5px;color:var(--mut)}
-.arrow{display:flex;align-items:center;color:var(--brand2);font-weight:800;font-size:18px}
-.two{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
-.feat{font-size:12px;color:var(--ink);margin:5px 0;padding-left:18px;position:relative}
+.callout{background:var(--soft2);border:1px solid #cfe8d6;border-radius:9px;padding:11px 13px;font-size:12px;color:#1d5e38}
+.flow{display:flex;gap:7px;align-items:stretch}
+.step{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 9px;text-align:center}
+.step .s{font-size:10.5px;color:var(--accent);font-weight:800}
+.step h4{font-size:12px;margin:3px 0}
+.step p{font-size:10px;color:var(--mut)}
+.arrow{display:flex;align-items:center;color:var(--brand2);font-weight:800;font-size:17px}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:13px}
+.feat{font-size:11.5px;color:var(--ink);margin:5px 0;padding-left:17px;position:relative}
 .feat::before{content:"\2714";position:absolute;left:0;color:var(--ok);font-size:11px;top:1px}
-.box{border:1px solid var(--line);border-radius:10px;padding:12px 13px}
-.box h4{font-size:13px;color:var(--brand);margin-bottom:6px}
-.specs{font-size:11px;color:var(--mut);line-height:1.7}
-.cta{background:var(--brand);color:#fff;border-radius:14px;padding:16px 20px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.cta .l h3{font-size:16px;margin-bottom:4px}
-.cta .l p{font-size:11.5px;opacity:.92}
-.cta .r{text-align:right;font-size:12px;line-height:1.7;white-space:nowrap}
+.box{border:1px solid var(--line);border-radius:9px;padding:11px 12px}
+.box h4{font-size:12.5px;color:var(--brand);margin-bottom:6px}
+.specs{font-size:11px;color:var(--mut);line-height:1.65}
+.prof{font-size:11px;line-height:1.6}
+.prof div{display:flex;border-bottom:1px dashed var(--line);padding:3px 0}
+.prof span{color:var(--mut);width:64px;flex-shrink:0}
+.cta{background:var(--brand);color:#fff;border-radius:13px;padding:15px 19px;margin-top:13px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.cta .l h3{font-size:15px;margin-bottom:4px}
+.cta .l p{font-size:11px;opacity:.92}
+.cta .r{text-align:right;font-size:11.5px;line-height:1.7;white-space:nowrap}
 .cta .r b{font-size:14px}
-.foot{position:absolute;bottom:8mm;left:13mm;right:13mm;border-top:1px solid var(--line);padding-top:6px;font-size:9.5px;color:#9aa7b8;display:flex;justify-content:space-between}
-.kfig{display:flex;gap:10px;margin:8px 0}
-.kfig .k{flex:1;background:var(--soft);border-radius:10px;padding:10px;text-align:center}
-.kfig .k .v{font-size:19px;font-weight:800;color:var(--brand)}
-.kfig .k .t{font-size:10px;color:var(--mut)}
+.foot{position:absolute;bottom:7mm;left:12mm;right:12mm;border-top:1px solid var(--line);padding-top:6px;font-size:9.5px;color:#9aa7b8;display:flex;justify-content:space-between}
+.kfig{display:flex;gap:9px;margin:7px 0}
+.kfig .k{flex:1;background:var(--soft);border-radius:9px;padding:9px;text-align:center}
+.kfig .k .v{font-size:17px;font-weight:800;color:var(--brand)}
+.kfig .k .t{font-size:9.5px;color:var(--mut)}
 @media print{
  body{background:#fff}
  .toolbar{display:none}
@@ -84,13 +87,13 @@ body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-seri
   <div class="hero">
     <div class="eyebrow">ベトナム発・即戦力の半導体設計エンジニア</div>
     <h1>半導体設計エンジニアの<br><b>育成・供給</b>ソリューション</h1>
-    <p>ベトナム トップ工科系「フェニカ大学（PSTC）」の <b>Synopsys公認カリキュラム</b> ＋ 日本語教育で育成した即戦力を、貴社の開発現場へ。採用難・若手不足・工程ボトルネックを、計画的な人材パイプラインで解消します。</p>
+    <p>外国人材の募集・教育・送り出し・定着支援を<b>一気通貫</b>で手がける<b>YSタレント</b>が、ベトナム トップ工科系「フェニカ大学（PSTC）」の <b>Synopsys公認カリキュラム</b> と日本語教育で育成した即戦力を、貴社の開発現場へ。採用難・若手不足・工程ボトルネックを、計画的な人材パイプラインで解消します。</p>
   </div>
 
-  <div class="sec-h">こんな課題はありませんか？</div>
+  <div class="sec-h">半導体業界が直面する人材課題</div>
   <div class="grid g3">
-    <div class="pain"><h4>採用難・若手不足</h4><p>国内での設計エンジニア採用が困難。未経験者の立ち上がりに時間がかかり、需要に応じた即戦力確保が難しい。</p></div>
-    <div class="pain"><h4>特定工程のボトルネック</h4><p>P&amp;R・DFT・アナログレイアウト・検証などの専門人材が不足し、受注・業務拡大の制約になっている。</p></div>
+    <div class="pain"><h4>採用難・若手不足</h4><p>国内の優秀な新卒は資金力のある自動車系メーカー等が確保。設計人材は外国籍で補わざるを得ないのが実情。</p></div>
+    <div class="pain"><h4>特定工程のボトルネック</h4><p>P&amp;R・DFT・アナログレイアウト・検証などの専門人材が不足し、受注・業務拡大の制約に。</p></div>
     <div class="pain"><h4>海外活用の品質・教育負担</h4><p>海外リソースは活用したいが、スキルのばらつき・日本語・教育の一貫性、現場メンターの負担が課題。</p></div>
   </div>
 
@@ -98,8 +101,8 @@ body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-seri
   <div class="grid g4">
     <div class="sol"><span class="n">1</span><h4>実務直結トレーニング</h4><p>世界標準EDA「Synopsys」公認の教材・認証プログラム。配属初日から実務に入れるスキルレベルを育成。</p></div>
     <div class="sol"><span class="n">2</span><h4>モジュール式カリキュラム</h4><p>P&amp;R／DFT／アナログL/O／検証など、貴社のニーズに合わせて重点モジュールを柔軟に組み合わせ。</p></div>
-    <div class="sol"><span class="n">3</span><h4>技術＋日本語をセット提供</h4><p>約4ヶ月の技術特訓と日本語教育（目標N3）を並行。最終試験（技術＋語学）の品質ゲートを通過した人材のみ推薦。</p></div>
-    <div class="sol"><span class="n">4</span><h4>採用〜配属の一気通貫管理</h4><p>スクリーニング→研修→品質チェック→配属までを一元管理。品質と定着率を両立。</p></div>
+    <div class="sol"><span class="n">3</span><h4>技術＋日本語をセット提供</h4><p>約4ヶ月の技術特訓と日本語教育（目標N3）を並行。技術＋語学の品質ゲートを通過した人材のみ推薦。</p></div>
+    <div class="sol"><span class="n">4</span><h4>採用〜配属の一気通貫管理</h4><p>スクリーニング→研修→品質チェック→配属→定着支援までを一元管理。品質と定着率を両立。</p></div>
   </div>
 
   <div class="sec-h">対応する設計領域</div>
@@ -111,7 +114,9 @@ body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-seri
     <span class="chip"><b>Digital Flow</b>（RTL→GDSII 一気通貫）</span>
   </div>
 
-  <div class="callout" style="margin-top:14px"><b>なぜ即戦力なのか：</b>EDAベンダー提供の“誰でも完結するラボ”ではなく、<b>現場で発生する課題を自力で解析・解決するプロセス</b>を含む実践演習で育成。配線性・タイミング収束、複雑なクロックツリー解析（CTS）など、実プロジェクトに耐えるレベルを重視しています。</div>
+  <div class="callout" style="margin-top:12px"><b>なぜ即戦力なのか：</b>EDAベンダー提供の“誰でも完結するラボ”ではなく、<b>現場で発生する課題を自力で解析・解決するプロセス</b>を含む実践演習で育成。配線性・タイミング収束、複雑なクロックツリー解析（CTS）など、実プロジェクトに耐えるレベルを重視しています。</div>
+
+  <div class="callout" style="margin-top:9px;background:#fff5ec;border-color:#f3cda6;color:#8a4a1e"><b>導入のご提案（二段構え）：</b>まずは現場が今すぐ必要とする<b>即戦力（デジタルバックエンド等）</b>から。並行して人事部門には<b>将来のコア人材確保とコストメリット</b>をご提示。現場と経営の双方にメリットのある形でパイプラインを構築します。</div>
 
   <div class="foot"><span>株式会社YSタレント ／ 顧問 大幸 秀成</span><span>半導体設計エンジニア 育成・供給ソリューション</span></div>
 </div>
@@ -119,62 +124,59 @@ body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-seri
 <!-- ===== 裏面 ===== -->
 <div class="page">
   <div class="brandbar">
-    <div class="lhs">TRAINING MODEL<br>&amp; PARTNERSHIP</div>
+    <div class="lhs">WHY YS TALENT<br>&amp; GLOBAL NETWORK</div>
     <div class="logo">YSタレント <span>×</span> Phenikaa University</div>
-    <div class="rhs">ベトナム・ハノイ<br>PSTC（半導体育成センター）</div>
+    <div class="rhs">ベトナム・ミャンマー<br>インドネシア</div>
   </div>
+
+  <div class="sec-h">YSタレントが選ばれる理由</div>
+  <div class="two">
+    <div>
+      <div class="feat"><b>一気通貫の支援体制</b>：現地での教育・訓練 → 送り出し（特定技能／技人国）→ 日本での受入・定着支援までワンストップ。</div>
+      <div class="feat"><b>高度人材に直結する大学ネットワーク</b>：ベトナム現地法人 YS Flora Vietnam が水利大学・ハノイ工業大学等と連携し、<b>機械・電気電子・IT</b>の高度人材を安定供給。</div>
+      <div class="feat"><b>直接雇用モデル</b>：派遣より<b>定着率・ロイヤリティが高く</b>、現地トップ層を惹きつけ、キャリア形成とチーム品質の安定に寄与。</div>
+      <div class="feat"><b>2026年ビザ厳格化に対応</b>：派遣先紐付け・在留期間設計まで実務を一貫サポート。</div>
+    </div>
+    <div class="box">
+      <h4>会社概要</h4>
+      <div class="prof">
+        <div><span>法人名</span>株式会社YSタレント</div>
+        <div><span>業種</span>有料職業紹介／人材コンサルティング・育成支援</div>
+        <div><span>理念</span>多様化への挑戦、人材活躍の創出</div>
+        <div><span>事業</span>外国人の雇用促進・紹介／派遣、技能実習・特定技能・エンジニア人材支援、育成コンサル</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h">海外人材ネットワーク（ASEAN 3拠点）</div>
+  <div class="grid g3">
+    <div class="box"><h4>ベトナム ─ YS Flora Vietnam</h4><div class="specs">水利大学・ハノイ工業大学等と連携。機械・電気電子・IT学科の<b>高度人材</b>を中心に供給。半導体・製造・ITで対日産学連携が加速。</div></div>
+    <div class="box"><h4>ミャンマー ─ YS Flora Myanmar / AMIE</h4><div class="specs">日本語学習意欲が高く、真面目でハングリー。ホスピタリティに優れ、確実な送り出し体制を構築。</div></div>
+    <div class="box"><h4>インドネシア ─ Flora Talent</h4><div class="specs">特定技能(P3MI)・SOライセンス取得済。4階建の研修施設・寮を完備し、圧倒的規模で展開。</div></div>
+  </div>
+  <div class="callout" style="margin-top:9px"><b>育成の流れ：</b>現地大学ネットワークで母集団を確保 → <b>フェニカ大学PSTCでSynopsys公認の技術特訓＋日本語</b> → 送り出し → 日本での受入・定着支援。<b>母集団から定着まで一社で完結</b>します。</div>
 
   <div class="sec-h">フェニカ大学 PSTC の強み</div>
   <div class="two">
     <div>
-      <div class="feat"><b>Synopsys公認・W認証</b>：修了証はPSTCとSynopsysの連名で発行（国際的なスキル証明）</div>
-      <div class="feat"><b>ハイエンド検証設備</b>：Zebu Server 4/5・HAPS、AI/HPC向けNVIDIA GPUサーバー群</div>
-      <div class="feat"><b>最先端インフラ</b>：2nmプロセス等を見据えた実習環境</div>
-      <div class="feat"><b>実務家による講師陣</b>：元Viettel 5G SoC開発責任者ら業界エキスパート＋Synopsys専門講師</div>
-      <div class="feat"><b>豊富な人材プール</b>：ベトナム主要大学（HUST等）と連携した優秀層のスクリーニング</div>
+      <div class="feat"><b>Synopsys公認・W認証</b>（修了証はPSTCとSynopsysの連名発行＝国際的スキル証明）</div>
+      <div class="feat"><b>ハイエンド検証設備</b>：Zebu Server 4/5・HAPS、NVIDIA GPUサーバー群。2nm世代を見据えた実習環境。</div>
+      <div class="feat"><b>実務家講師</b>：元Viettel 5G SoC開発責任者ら＋Synopsys専門講師。</div>
     </div>
     <div class="box">
-      <h4>国家規模のプロジェクト</h4>
-      <div class="specs">ベトナムは <b>2030年までに半導体設計エンジニア8,000人超</b>の育成を国家目標に掲げ、台湾の半導体エコシステムと連携。理系大卒は基本的に英語対応可で、若く優秀な人材層が厚い市場です。</div>
+      <h4>進め方・規模・スケジュール</h4>
+      <div class="specs">・<b>5〜10名</b>のチーム単位（デジタルバックエンドから開始可）で段階拡大<br>・<b>4〜5月</b>面談 → <b>約半年</b>研修 → <b>年末〜年始</b>入社（約1年スパン）<br>・雇用形態は<b>直接雇用／派遣</b>いずれも対応</div>
       <div class="kfig">
-        <div class="k"><div class="v">5–10名</div><div class="t">チーム導入の目安</div></div>
-        <div class="k"><div class="v">約4ヶ月</div><div class="t">技術特訓期間</div></div>
+        <div class="k"><div class="v">5–10名</div><div class="t">チーム導入目安</div></div>
+        <div class="k"><div class="v">約4ヶ月</div><div class="t">技術特訓</div></div>
       </div>
-    </div>
-  </div>
-
-  <div class="sec-h">導入プロセス</div>
-  <div class="flow">
-    <div class="step"><div class="s">STEP 1</div><h4>選抜・スクリーニング</h4><p>GPA・基礎学力・適性で選抜。貴社の技術スタックに合わせ基準設定。</p></div>
-    <div class="arrow">›</div>
-    <div class="step"><div class="s">STEP 2</div><h4>技術特訓（約4ヶ月）</h4><p>Synopsys認定コースで重点モジュールを習得。実設計フローで演習。</p></div>
-    <div class="arrow">›</div>
-    <div class="step"><div class="s">STEP 3</div><h4>日本語＋品質ゲート</h4><p>日本語N3目標。技術＋語学の最終試験を通過した人材のみ推薦。</p></div>
-    <div class="arrow">›</div>
-    <div class="step"><div class="s">STEP 4</div><h4>内定・配属</h4><p>早期の条件付き内定で優秀層を確保。配属初日から実務へ。</p></div>
-  </div>
-
-  <div class="two" style="margin-top:14px">
-    <div class="box">
-      <h4>進め方・スケジュール</h4>
-      <div class="specs">
-        ・<b>最小5名〜最大10名</b>のチーム単位（デジタルバックエンドから開始可）で段階的に拡大<br>
-        ・<b>4〜5月</b>に面談 → <b>約半年</b>の技術・日本語研修 → <b>年末〜年始</b>に入社（約1年スパン）<br>
-        ・<b>雇用形態</b>：直接雇用（定着・ロイヤリティ向上）／派遣 いずれも対応<br>
-        ・<b>ビザ運用</b>：2026年3月以降の厳格化に対応（派遣先紐付け・在留期間の設計まで一貫サポート）
-      </div>
-    </div>
-    <div class="box">
-      <h4>将来構想：オフショア展開</h4>
-      <div class="specs">来日メンバーが貴社の文化・技術を習得し、数年後に<b>ブリッジエンジニア</b>として活躍。将来的には<b>ベトナム現地のセキュアな開発拠点（オフショア）</b>へ発展させる構想まで描けます。</div>
-      <div class="callout" style="margin-top:8px;font-size:11.5px">投資の目安：<b>1名あたり概算 80万円〜</b>（研修・教材・渡航等込／規模・要件により変動）。立ち上げ期は単価を抑えたリスク共有型の提案も可能です。</div>
     </div>
   </div>
 
   <div class="cta">
     <div class="l">
       <h3>まずは、無料相談・ベトナム視察／面接のご提案から。</h3>
-      <p>貴社の必要工程・人数・ツール環境をお聞かせください。要件定義 → 候補者スクリーニング → カリキュラム調整まで、一気通貫でご支援します。</p>
+      <p>貴社の必要工程・人数・ツール環境をお聞かせください。要件定義 → スクリーニング → カリキュラム調整まで一気通貫でご支援します。</p>
     </div>
     <div class="r">
       <b>株式会社YSタレント</b><br>
@@ -184,7 +186,7 @@ body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Segoe UI",sans-seri
     </div>
   </div>
 
-  <div class="foot"><span>株式会社YSタレント</span><span>ASEANネットワーク：ベトナム・ミャンマー・インドネシア</span></div>
+  <div class="foot"><span>株式会社YSタレント（YS TALENT Inc.）</span><span>ASEANネットワーク：ベトナム・ミャンマー・インドネシア</span></div>
 </div>
 </body>
 </html>
