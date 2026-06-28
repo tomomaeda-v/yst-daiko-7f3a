@@ -302,7 +302,7 @@ if(sessionStorage.getItem('gok')==='1'){document.getElementById('gate').style.di
 <section class="tab" id="t-flyer">
   <div class="card"><h2>営業ツール：大幸さん用 A4両面チラシ <span class="tag">半導体エンジニア育成・供給</span></h2>
     <p>大幸さんが顧客（半導体メーカー・デザインハウス等）への紹介活動で使えるA4両面チラシを用意しました。テーマは<b>「YSタレント × フェニカ大学（PSTC・Synopsys認定）によるベトナム半導体設計エンジニアの育成・供給」</b>。内部の価格交渉・個社名は伏せ、YSタレントの会社アピール（一気通貫体制・大学ネットワーク・ASEAN3拠点・直接雇用の定着優位）を強化しています。</p>
-    <div class="warnbox" style="background:rgba(46,160,67,.10);border-color:var(--ok)"><a href="flyer.html" target="_blank" rel="noopener" style="display:inline-block;background:#1f6feb;color:#fff;text-decoration:none;padding:9px 16px;border-radius:7px;font-weight:700">📄 チラシを開く（別タブ）</a> <span style="margin-left:8px">開いた先の右上「印刷 / PDF保存」ボタンでA4両面印刷・PDF化できます。</span></div>
+    <div class="warnbox" style="background:rgba(46,160,67,.10);border-color:var(--ok)"><a href="flyer.html" target="_blank" rel="noopener" style="display:inline-block;background:#1f6feb;color:#fff;text-decoration:none;padding:9px 16px;border-radius:7px;font-weight:700">📄 チラシを開く（別タブ）</a> <a href="flyer_final.pdf" target="_blank" rel="noopener" style="display:inline-block;background:#b23b16;color:#fff;text-decoration:none;padding:9px 16px;border-radius:7px;font-weight:700;margin-left:8px">📕 最終版チラシ（PDF）</a><div class="note" style="margin-top:8px">「チラシを開く」はHTML版（編集容易）。「最終版（PDF）」は確定デザイン版。印刷・配布はPDF版を推奨。</div></div>
     <div style="margin-top:12px"><div class="note" style="margin-bottom:6px">▼ チラシ プレビュー（スクロールで表面・裏面を確認）</div>
     <iframe src="flyer.html" title="営業チラシ" style="width:100%;height:760px;border:1px solid var(--line);border-radius:8px;background:#fff"></iframe></div>
     <h3>チラシの構成</h3>
@@ -452,6 +452,30 @@ if(sessionStorage.getItem('gok')==='1'){document.getElementById('gate').style.di
 </section>
 
 <section class="tab" id="t-agenda">
+  <div class="card"><h2>7/17 MTG 協議資料（たたき台） <span class="tag">2026/6/23作成・添付pptx</span></h2>
+    <div class="warnbox" style="background:rgba(46,160,67,.10);border-color:var(--ok)"><a href="mtg_202607_draft.pptx" style="display:inline-block;background:#1f6feb;color:#fff;text-decoration:none;padding:9px 16px;border-radius:7px;font-weight:700">📊 7月MTGたたき台（PPTX）をダウンロード</a> <span class="note" style="margin-left:8px">「YST × 半導体顧問 大幸様 共創PJ 協議用たたき台 ― 6つの論点」（前田作成）。</span></div>
+    <h3>本日協議したい6つの論点</h3>
+    <ol style="padding-left:20px;line-height:1.9">
+      <li><b>トランスビジョン社の買収</b>：DC保守の収益性評価・割高論点・代替候補ソーシング／アップグレード提供体制／CMMC個人保有懸念／DC産業俯瞰図／固定対価圧縮＋アーンアウト・CoC条項</li>
+      <li><b>シンコム×フェニカ 横展開</b>：育成の着地点（DB・タイミング収束・CTS・MCMM）の妥当性、カリキュラム目利き、横展開先(STEP2)の選定、将来のYST設計事業立上げ(STEP3)</li>
+      <li><b>RISE-A 入会（申込）とその後</b>：入会後の展開・ネットワーク(南川氏ら)活用・登壇/共催連携・⑤セミナーとの連動</li>
+      <li><b>前回(6/2)の振り返り</b>：90日アクションの担当・期限確定／成功報酬(第4条)の叩き台／大幸氏経由の紹介推進(KPI≥25)の着手先</li>
+      <li><b>セミナー企画 草案</b>：A=半導体向け「AI時代の半導体設計を支えるベトナム設計人材」／B=介護向け「介護現場へのAI・ヒューマノイド導入と外国人材の協働」。訴求軸・登壇者・開催形態</li>
+      <li><b>アプリ活用・改善</b>：運用ルール・共有範囲、クラウド共有移行、ターゲット実データ投入、商談ログのステージ管理(紹介→面談→MOU→受注)、機微情報のアクセス範囲</li>
+    </ol>
+    <h3>補足（資料より）</h3>
+    <ul class="clean">
+      <li>シンコム三者モデル：YST(統括)×フェニカ大PSTC(設計育成)×YS Flora Lotus(日本語)。シンコム(技術者68名)が5〜10名で開始前向き。<b>ヌヴォトンは検討の結果、導入には至らず</b>。7/22 or 28面接→8月研修→来年1〜2月配属。</li>
+      <li>RISE-A：半導体のユーザー・サプライヤー・サポーターを繋ぐ一般社団(2025/7設立・三井不動産連携)。<b>入会を申し込む方針</b>（会員種別：特別会員A 入会12万/年48万 ほか）。</li>
+    </ul>
+    <h3>次回(7/17)へのネクストステップ</h3>
+    <ul class="clean">
+      <li>トランスビジョン：収益性・アップグレード方針を確認→アーンアウト含む条件設計＋代替候補ソーシングを協議</li>
+      <li>シンコム×フェニカ：7/22 or 28面接へ候補選別。横展開先(STEP2)の具体先を決定</li>
+      <li>RISE-A：入会申込→展開（セミナー・登壇連携・紹介）を具体化</li>
+      <li>90日アクションの担当・期限確定／成功報酬の叩き台協議／セミナーA・Bの登壇者・形態・日程確定／アプリ運用ルール合意</li>
+    </ul>
+  </div>
   <div class="card">
     <h2>次回定例MTG アジェンダ（毎月2時間）</h2>
     <ol style="padding-left:20px;line-height:2">
